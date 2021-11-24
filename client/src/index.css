@@ -2,3 +2,12 @@ main {
   min-height: 80vh;
   padding-top: 1.5rem;
 }
+
+a {
+  text-decoration: none;
+}
+
+.shadow-box {
+  border-radius: 0.3rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
