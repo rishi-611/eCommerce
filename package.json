@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "server": "nodemon backend/server.js",
+    "server": "env-cmd -f ./config/dev.env nodemon backend/server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "concurrently": "^6.4.0",
+    "env-cmd": "^10.1.0",
     "nodemon": "^2.0.15"
   }
 }
