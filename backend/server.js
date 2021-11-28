@@ -1,4 +1,7 @@
-const express = require("express");
+import express from "express";
+import chalk from "chalk";
+
+import "./db/setupDB.js";
 
 const PORT = process.env.PORT || 5000;
 
@@ -10,5 +13,5 @@ app.get("/api", (req, ress) => {
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);
-  console.log("app running on port " + PORT);
+  console.log(chalk.yellow.bold("app running on port " + PORT));
 });
