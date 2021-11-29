@@ -8,7 +8,11 @@
     "start": "node backend/server.js",
     "server": "env-cmd -f ./config/dev.env nodemon backend/server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "seedUsers": "env-cmd -f ./config/dev.env node backend/seeder.js --users",
+    "seedProducts": "env-cmd -f ./config/dev.env node backend/seeder.js --products",
+    "deleteAndSeedUsers": "env-cmd -f ./config/dev.env node backend/seeder.js --users -d",
+    "deleteAndSeedProducts": "env-cmd -f ./config/dev.env node backend/seeder.js --products -d"
   },
   "repository": {
     "type": "git",
@@ -21,8 +25,10 @@
   },
   "homepage": "https://github.com/rishi-611/eCommerce#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "chalk": "^5.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.2.0",
     "mongoose": "^6.0.13"
   },

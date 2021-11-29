@@ -1,5 +1,5 @@
 import React from "react";
-import productList from "../assets/extras/products";
+import productList from "../../../data/products";
 import ProductSummary from "../components/ProductSummary";
 import { Row, Col } from "react-bootstrap";
 import "../assets/css/products.css";
