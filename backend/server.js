@@ -1,15 +1,28 @@
 import express from "express";
 import chalk from "chalk";
 
+import productsRoute from "./routes/productsRoute.js";
+
 import "./db/setupDB.js";
+import { errorHandler, notFound } from "./middlewares/errorMiddlewars.js";
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 
+// middlewares and other setup
+app.use(express.json());
+
+// routes
+app.use("/api/products", productsRoute);
+
+// rest route
 app.get("/api", (req, ress) => {
-  ress.json({ hello: "hello" });
+  ress.json({ message: "API working" });
 });
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, (err) => {
   if (err) console.log(err);
