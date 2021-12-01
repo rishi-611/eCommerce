@@ -16,11 +16,6 @@ app.use(express.json());
 // routes
 app.use("/api/products", productsRoute);
 
-// rest route
-app.get("/api", (req, ress) => {
-  ress.json({ message: "API working" });
-});
-
 app.use(notFound);
 app.use(errorHandler);
 
