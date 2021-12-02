@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   error: null,
   productList: [],
+  product: null,
 };
 
 const productReducer = (state = initialState, action) => {
@@ -22,6 +23,21 @@ const productReducer = (state = initialState, action) => {
         loading: false,
         error: payload,
         productList: [],
+      };
+
+    case types.GET_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        product: payload,
+      };
+    case types.GET_PRODUCT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+        product: payload,
       };
 
     default:

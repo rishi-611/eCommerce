@@ -9,6 +9,19 @@ productsRoute.get("/", async (req, res) => {
     res.status(200).json(products);
   } catch (err) {
     res.status(500).json({
+      message: "Could not find any products",
+      error: err,
+    });
+  }
+});
+
+productsRoute.get("/:id", async (req, res) => {
+  const id = req.params;
+  try {
+    const products = await Product.findById(id);
+    res.status(200).json(products);
+  } catch (err) {
+    res.status(500).json({
       message: "Could not find any users",
       error: err,
     });
