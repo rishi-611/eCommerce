@@ -34,3 +34,7 @@ export const getProduct = (id) => async (dispatch) => {
     });
   }
 };
+
+export const cleanupProduct = () => ({
+  type: types.CLEANUP_PRODUCT,
+});

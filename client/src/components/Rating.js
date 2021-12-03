@@ -1,6 +1,6 @@
 import React from "react";
 
-const Rating = ({ rating, color = "#ff9529", numReviews }) => {
+const Rating = ({ rating, color = "#ff9529", text }) => {
   return (
     <React.Fragment>
       <span className="rating-box" style={{ color }}>
@@ -60,7 +60,7 @@ const Rating = ({ rating, color = "#ff9529", numReviews }) => {
           ></i>
         </span>{" "}
       </span>
-      <span className="rating-sub text-muted">from {numReviews} reviews</span>
+      {text && <p className="rating-sub text-muted">{text}</p>}
     </React.Fragment>
   );
 };

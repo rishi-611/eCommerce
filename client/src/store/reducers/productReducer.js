@@ -39,6 +39,11 @@ const productReducer = (state = initialState, action) => {
         error: payload,
         product: payload,
       };
+    case types.CLEANUP_PRODUCT:
+      return {
+        ...state,
+        product: null,
+      };
 
     default:
       return state;

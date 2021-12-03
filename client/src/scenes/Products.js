@@ -14,7 +14,7 @@ const Products = () => {
   );
   useEffect(() => {
     dispatch(getProducts());
-  }, [getProducts]);
+  }, [dispatch]);
   return (
     <Row>
       {productList.length > 0 &&

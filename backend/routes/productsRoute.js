@@ -16,7 +16,8 @@ productsRoute.get("/", async (req, res) => {
 });
 
 productsRoute.get("/:id", async (req, res) => {
-  const id = req.params;
+  const { id } = req.params;
+  console.log(id);
   try {
     const products = await Product.findById(id);
     res.status(200).json(products);
