@@ -45,6 +45,12 @@ const productReducer = (state = initialState, action) => {
         product: null,
       };
 
+    case types.PRODUCT_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+
     default:
       return state;
   }

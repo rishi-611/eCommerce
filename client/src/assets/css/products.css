@@ -6,3 +6,11 @@
 .rating-sub {
   font-size: 0.9rem;
 }
+
+.price {
+  font-weight: bold;
+}
+
+.addToCart-btn {
+  width: 100%;
+}
