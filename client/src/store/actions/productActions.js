@@ -1,6 +1,8 @@
 import * as types from "../constants";
 import axios from "axios";
 
+const generalMsg = "Oh Snap! Something went wrong!";
+
 export const getProducts = () => async (dispatch) => {
   dispatch({
     type: types.PRODUCT_LOADING,
@@ -13,10 +15,11 @@ export const getProducts = () => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
-    console.log(err);
     return dispatch({
       type: types.GET_PRODUCTS_FAILURE,
-      payload: err,
+      payload: {
+        message: err.response?.data?.message || generalMsg,
+      },
     });
   }
 };
@@ -34,10 +37,11 @@ export const getProduct = (id) => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
-    console.log(err);
     return dispatch({
       type: types.GET_PRODUCT_FAILURE,
-      payload: err,
+      payload: {
+        message: err.response?.data?.message || generalMsg,
+      },
     });
   }
 };

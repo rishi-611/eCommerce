@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProduct, cleanupProduct } from "../store/actions/productActions";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import Rating from "../components/Rating";
+import Alert from "../components/Alert";
 
 const Product = () => {
   const dispatch = useDispatch();
@@ -26,12 +27,12 @@ const Product = () => {
     if (!productDetails.product) dispatch(getProduct(id));
   }, []);
 
-  if (loading) {
+  if (loading || (!error && !product)) {
     return <h4>Loading...</h4>;
   }
 
-  if (!loading && (error || !product)) {
-    return <h4>Error</h4>;
+  if (!loading && error) {
+    return <Alert variant="danger">{error.message}</Alert>;
   }
 
   return (
