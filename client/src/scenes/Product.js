@@ -5,6 +5,7 @@ import { getProduct, cleanupProduct } from "../store/actions/productActions";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import Rating from "../components/Rating";
 import Alert from "../components/Alert";
+import Spinner from "../components/Spinner";
 
 const Product = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const Product = () => {
   }, []);
 
   if (loading || (!error && !product)) {
-    return <h4>Loading...</h4>;
+    return <Spinner />;
   }
 
   if (!loading && error) {
