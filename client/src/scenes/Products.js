@@ -15,7 +15,7 @@ const Products = () => {
     (state) => state.products
   );
   useEffect(() => {
-    dispatch(getProducts());
+    if (!productList || productList.length == 0) dispatch(getProducts());
   }, [dispatch]);
 
   if (loading) {

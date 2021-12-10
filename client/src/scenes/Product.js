@@ -1,8 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct, cleanupProduct } from "../store/actions/productActions";
-import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Image,
+  ListGroup,
+  Card,
+  Button,
+  Form,
+} from "react-bootstrap";
 import Rating from "../components/Rating";
 import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
@@ -15,6 +23,7 @@ const Product = () => {
     error: products.error,
   }));
   const { id } = useParams();
+  const [qty, setQty] = useState(1);
 
   const { product, loading, error } = productDetails;
 
@@ -35,7 +44,7 @@ const Product = () => {
   if (!loading && error) {
     return <Alert variant="danger">{error.message}</Alert>;
   }
-
+  console.log(qty);
   return (
     <React.Fragment>
       <Row>
@@ -75,13 +84,44 @@ const Product = () => {
                   <Col>Status:</Col>
                   <Col>
                     <strong>
-                      {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
+                      {product.countInStock > 0 ? (
+                        <p className="text-success">
+                          <strong>In Stock</strong>
+                        </p>
+                      ) : (
+                        <p className="text-danger">Out of Stock</p>
+                      )}
                     </strong>
                   </Col>
                 </Row>
               </ListGroup.Item>
+              {product.countInStock > 0 && (
+                <ListGroup.Item>
+                  <Row>
+                    <Col className="d-flex align-items-center">Qty: </Col>
+                    <Col>
+                      <Form.Control
+                        as="select"
+                        value={qty}
+                        onChange={(e) => setQty(e.target.value)}
+                        className="text-center"
+                      >
+                        {[...Array(product.countInStock).keys()].map((key) => (
+                          <option key={key + 1} value={key + 1}>
+                            {key + 1}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              )}
               <ListGroup.Item>
-                <Button className="addToCart-btn btn-block" type="button">
+                <Button
+                  className="addToCart-btn btn-block"
+                  type="button"
+                  disabled={product.countInStock <= 0}
+                >
                   Add to Cart
                 </Button>
               </ListGroup.Item>
