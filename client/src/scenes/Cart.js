@@ -11,11 +11,13 @@ const Cart = () => {
   const dispatch = useDispatch();
   const { cartItems, error, loading } = useSelector((state) => state.cart);
   useEffect(() => {
-    //get qty from query
-    const { qty } = qs.parse(search);
-
+    //get qty from query, default quantity is 1
+    const { qty } = qs.parse(search) || 1;
+    if (!qty || !id) return;
     // add product to cart
     dispatch(addToCart(id, qty));
+
+    console.log(cartItems);
   }, []);
   return <div>Cart</div>;
 };

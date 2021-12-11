@@ -21,12 +21,10 @@ const cartReducer = (state = initialState, action) => {
       };
 
     case types.ADD_TO_CART_SUCCESS:
-      console.log(payload);
       //if product already exists in list, update it with new one, if it doesnt, push it to end
       const existingProduct = state.cartItems.find(
         (product) => product.productId === payload.productId
       );
-      console.log(existingProduct);
       if (!existingProduct) {
         return {
           ...state,
