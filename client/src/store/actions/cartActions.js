@@ -2,27 +2,27 @@ import * as types from "../constants";
 import axios from "axios";
 
 //fetches cart from localstorage and updates store
-export const loadCart = () => (dispatch) => {
-  try {
-    let cartItems = localStorage.getItem("cartItems");
-    if (!cartItems) return;
+// export const loadCart = () => (dispatch) => {
+//   try {
+//     let cartItems = localStorage.getItem("cartItems");
+//     if (!cartItems) return;
 
-    //cart exists already
-    cartItems = JSON.parse(cartItems);
-    return dispatch({
-      type: types.LOAD_CART_SUCCESS,
-      payload: cartItems,
-    });
-  } catch (err) {
-    //errors dont really matter as we are initializing an empty array anyway
-    console.error(err);
-  }
-};
+//     //cart exists already
+//     cartItems = JSON.parse(cartItems);
+//     return dispatch({
+//       type: types.LOAD_CART_SUCCESS,
+//       payload: cartItems,
+//     });
+//   } catch (err) {
+//     //errors dont really matter as we are initializing an empty array anyway
+//     console.error(err);
+//   }
+// };
 
 //fetch product details and push it to cart, and save new cart item list to localstorage
 export const addToCart = (productId, qty) => async (dispatch, getState) => {
   try {
-    const { data } = await axios.get("/api/products/" + id);
+    const { data } = await axios.get("/api/products/" + productId);
 
     const product = {
       productId,
@@ -41,6 +41,7 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
     //get updated cartItems from state, push product, and update localstorage
     //this code will be reached after dispatch is executed, hence state cartItems are updated already
     let cartItems = getState().cart.cartItems;
+    // console.log(cartItems);
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   } catch (err) {
     console.error(err);
