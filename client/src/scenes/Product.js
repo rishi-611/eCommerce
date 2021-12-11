@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct, cleanupProduct } from "../store/actions/productActions";
 import {
@@ -16,6 +17,7 @@ import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
 
 const Product = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const productDetails = useSelector(({ products }) => ({
     product: products.product,
@@ -44,7 +46,6 @@ const Product = () => {
   if (!loading && error) {
     return <Alert variant="danger">{error.message}</Alert>;
   }
-  console.log(qty);
   return (
     <React.Fragment>
       <Row>
@@ -100,18 +101,23 @@ const Product = () => {
                   <Row>
                     <Col className="d-flex align-items-center">Qty: </Col>
                     <Col>
-                      <Form.Control
-                        as="select"
-                        value={qty}
-                        onChange={(e) => setQty(e.target.value)}
-                        className="text-center"
-                      >
-                        {[...Array(product.countInStock).keys()].map((key) => (
-                          <option key={key + 1} value={key + 1}>
-                            {key + 1}
-                          </option>
-                        ))}
-                      </Form.Control>
+                      <Form>
+                        {" "}
+                        <Form.Control
+                          as="select"
+                          value={qty}
+                          onChange={(e) => setQty(e.target.value)}
+                          className="text-center"
+                        >
+                          {[...Array(product.countInStock).keys()].map(
+                            (key) => (
+                              <option key={key + 1} value={key + 1}>
+                                {key + 1}
+                              </option>
+                            )
+                          )}
+                        </Form.Control>
+                      </Form>
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -121,6 +127,7 @@ const Product = () => {
                   className="addToCart-btn btn-block"
                   type="button"
                   disabled={product.countInStock <= 0}
+                  onClick={() => navigate(`/cart/${id}?qty=${qty}`)}
                 >
                   Add to Cart
                 </Button>
