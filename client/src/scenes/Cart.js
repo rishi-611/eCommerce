@@ -35,27 +35,19 @@ const Cart = () => {
         <Col md="8">
           <ListGroup>
             {cartItems.map((item) => (
-              <ListGroup.Item key={item.productId}>
+              <ListGroup.Item key={item.productId} className="mb-sm-0 mb-2">
                 <Row>
-                  <Col sm="12" md="3">
+                  <Col className="col-12 col-sm-3">
                     <Image
                       src={item.image}
                       alt={`image of ${item.name}`}
                       fluid
                     />
                   </Col>
-                  <Col
-                    className="d-flex justify-content-center align-items-center py-2"
-                    sm="4"
-                    md="3"
-                  >
-                    <h4>{item.name}</h4>
+                  <Col className="d-flex justify-content-center align-items-center py-2 px-sm-2 col-12 col-sm-3">
+                    <h4 className="text-center text-sm-left">{item.name}</h4>
                   </Col>
-                  <Col
-                    className="d-flex justify-content-center align-items-center"
-                    sm="4"
-                    md="3"
-                  >
+                  <Col className="d-flex justify-content-center align-items-center col-6 col-sm-3">
                     <Form>
                       {" "}
                       <Form.Select
@@ -74,11 +66,7 @@ const Cart = () => {
                       </Form.Select>
                     </Form>
                   </Col>
-                  <Col
-                    className="d-flex justify-content-center align-items-center"
-                    sm="4"
-                    md="3"
-                  >
+                  <Col className="d-flex justify-content-center align-items-center col-6 col-sm-3">
                     <Button
                       onClick={() => dispatch(removeFromCart(item.productId))}
                     >
