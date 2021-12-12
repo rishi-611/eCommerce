@@ -52,3 +52,16 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
     });
   }
 };
+
+export const removeFromCart = (productId) => (dispatch, getState) => {
+  //remove item from state cart
+  dispatch({
+    type: types.REMOVE_FROM_CART,
+    payload: {
+      productId,
+    },
+  });
+
+  //update localstorage from newly updated state cart
+  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+};

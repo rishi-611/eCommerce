@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import qs from "query-string";
-
-import { addToCart } from "../store/actions/cartActions";
+import { Row, Col, Image, ListGroup, Button } from "react-bootstrap";
+import { addToCart, removeFromCart } from "../store/actions/cartActions";
+import Alert from "../components/Alert";
 
 const Cart = () => {
   const { id } = useParams();
@@ -19,7 +20,14 @@ const Cart = () => {
 
     console.log(cartItems);
   }, []);
-  return <div>Cart</div>;
+
+  if (cartItems.length === 0 && !loading) {
+    return (
+      <Alert>Your Cart is empty. Add products to cart to view them here.</Alert>
+    );
+  }
+
+  return <React.Fragment>Cart</React.Fragment>;
 };
 
 export default Cart;
