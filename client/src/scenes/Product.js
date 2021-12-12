@@ -103,8 +103,7 @@ const Product = () => {
                     <Col>
                       <Form>
                         {" "}
-                        <Form.Control
-                          as="select"
+                        <Form.Select
                           value={qty}
                           onChange={(e) => setQty(e.target.value)}
                           className="text-center"
@@ -116,7 +115,7 @@ const Product = () => {
                               </option>
                             )
                           )}
-                        </Form.Control>
+                        </Form.Select>
                       </Form>
                     </Col>
                   </Row>

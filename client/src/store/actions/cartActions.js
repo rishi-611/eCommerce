@@ -37,10 +37,13 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
       type: types.ADD_TO_CART_SUCCESS,
       payload: product,
     });
+    console.log("dispatched");
 
     //get updated cartItems from state, push product, and update localstorage
     //this code will be reached after dispatch is executed, hence state cartItems are updated already
     let cartItems = getState().cart.cartItems;
+    console.log("updated cart: ");
+    console.log(cartItems);
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   } catch (err) {
     console.error(err);
