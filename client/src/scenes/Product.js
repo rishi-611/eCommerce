@@ -15,6 +15,7 @@ import {
 import Rating from "../components/Rating";
 import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
+import GoBack from "../components/GoBack";
 
 const Product = () => {
   const navigate = useNavigate();
@@ -40,14 +41,25 @@ const Product = () => {
   }, []);
 
   if (loading || (!error && !product)) {
-    return <Spinner />;
+    return (
+      <React.Fragment>
+        <GoBack></GoBack>
+        <Spinner></Spinner>
+      </React.Fragment>
+    );
   }
 
   if (!loading && error) {
-    return <Alert variant="danger">{error.message}</Alert>;
+    return (
+      <React.Fragment>
+        <GoBack></GoBack>
+        <Alert variant="danger">{error.message}</Alert>;
+      </React.Fragment>
+    );
   }
   return (
     <React.Fragment>
+      <GoBack></GoBack>
       <Row>
         <Col md="5">
           <Image src={product.image} fluid />

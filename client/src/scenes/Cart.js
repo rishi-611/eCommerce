@@ -5,6 +5,7 @@ import qs from "query-string";
 import { Row, Col, Image, ListGroup, Button, Form } from "react-bootstrap";
 import { addToCart, removeFromCart } from "../store/actions/cartActions";
 import Alert from "../components/Alert";
+import GoBack from "../components/GoBack";
 
 const Cart = () => {
   const { id } = useParams();
@@ -24,13 +25,20 @@ const Cart = () => {
   //handle empty cart
   if (cartItems.length === 0 && !loading) {
     return (
-      <Alert>Your Cart is empty. Add products to cart to view them here.</Alert>
+      <React.Fragment>
+        <Alert>
+          Your Cart is empty. Add products to cart to view them here.
+        </Alert>
+        <GoBack />
+      </React.Fragment>
     );
   }
 
   //else show cart
   return (
     <React.Fragment>
+      <GoBack />
+
       <Row>
         <Col md="8">
           <ListGroup>
