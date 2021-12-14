@@ -7,6 +7,8 @@ import Header from "./components/Header";
 import Products from "./scenes/Products";
 import Product from "./scenes/Product";
 import Cart from "./scenes/Cart";
+import Login from "./scenes/Login";
+import Register from "./scenes/Register";
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
               <Route exact path="/products/:id" element={<Product />} />
               <Route exact path="/cart/:id" element={<Cart />} />
               <Route exact path="/cart" element={<Cart />} />
+              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/register" element={<Register />} />
             </Routes>
           </Container>
         </main>
