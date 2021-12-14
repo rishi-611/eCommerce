@@ -1,5 +1,4 @@
 import User from "../db/models/User.js";
-import auth from "../middlewares/auth.js";
 import { validationResult } from "express-validator";
 
 export const loginUser = async (req, res) => {
@@ -15,8 +14,7 @@ export const loginUser = async (req, res) => {
   }
 
   const token = await user.getAuthToken();
-  await user.save();
-  res.send({ token });
+  res.send({ token, user });
 };
 
 export const registerUser = async (req, res) => {
@@ -41,9 +39,19 @@ export const registerUser = async (req, res) => {
     // get jwt token
     const token = await user.getAuthToken();
     await user.save();
-    return res.status(201).json({ token });
+    return res.status(201).json({ token, user });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ errors: [{ msg: "Server error" }] });
+  }
+};
+
+export const getUserDetails = async (req, res) => {
+  try {
+    const user = req.user;
+    return res.json({ user });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: err });
   }
 };

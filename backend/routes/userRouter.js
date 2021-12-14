@@ -1,12 +1,16 @@
 import express from "express";
 import { check } from "express-validator";
+import auth from "../middlewares/auth.js";
 
-import { loginUser, registerUser } from "../controllers/userControllers.js";
+import {
+  getUserDetails,
+  loginUser,
+  registerUser,
+} from "../controllers/userControllers.js";
 
 const userRouter = express.Router();
 
-userRouter.post(
-  "/",
+userRouter.route("/").post(
   [
     check("name", "You must provide a name").notEmpty(),
     check("email", "You must provide a valid email address").isEmail(),
@@ -16,6 +20,9 @@ userRouter.post(
   ],
   registerUser
 );
-userRouter.post("/login", loginUser);
+
+userRouter.route("/login").post(loginUser);
+
+userRouter.route("/me").get(auth, getUserDetails);
 
 export default userRouter;
