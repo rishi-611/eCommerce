@@ -24,6 +24,10 @@ const Header = () => {
                 {" "}
                 <i className="fas fa-power-off"></i> Login{" "}
               </Nav.Link>
+              <Nav.Link as={Link} to="/register">
+                {" "}
+                <i className="fas fa-user-plus"></i> Sign Up{" "}
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

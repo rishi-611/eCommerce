@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import "../assets/css/auth.css";
 const Login = () => {
   return (
@@ -14,6 +16,7 @@ const Login = () => {
                 <div className="form-group">
                   <label className="form-control-label">EMAIL</label>
                   <input
+                    autoComplete="on"
                     type="email"
                     className="form-control"
                     placeholder="Your Email"
@@ -22,6 +25,7 @@ const Login = () => {
                 <div className="form-group">
                   <label className="form-control-label">PASSWORD</label>
                   <input
+                    autoComplete="off"
                     type="password"
                     className="form-control"
                     placeholder="Your Password"
@@ -33,6 +37,17 @@ const Login = () => {
                     <button type="submit" className="btn btn-outline-light">
                       LOGIN
                     </button>
+                  </div>
+                </div>
+
+                <div className="loginbttm">
+                  <div className="d-flex justify-content-center align-items-center login-btm login-button">
+                    Don't have an account?{" "}
+                    <Link to="/register">
+                      <span className="auth-bottom-link hover-underline-animation">
+                        Sign Up
+                      </span>
+                    </Link>
                   </div>
                 </div>
               </form>
