@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../store/actions/userActions";
 
 import "../assets/css/auth.css";
 const Login = () => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  // console.log(isLoggedIn);
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) =>
+    setFormData((formData) => ({
+      ...formData,
+      [e.target.name]: e.target.value,
+    }));
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    dispatch(login(formData));
+  };
+
   return (
     <div className="container">
       <div className="row">
@@ -12,7 +35,7 @@ const Login = () => {
 
           <div className="col-lg-12 login-form">
             <div className="col-lg-12 login-form">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label className="form-control-label">EMAIL</label>
                   <input
@@ -20,6 +43,9 @@ const Login = () => {
                     type="email"
                     className="form-control"
                     placeholder="Your Email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="form-group">
@@ -29,6 +55,9 @@ const Login = () => {
                     type="password"
                     className="form-control"
                     placeholder="Your Password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
                   />
                 </div>
 

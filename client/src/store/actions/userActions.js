@@ -1,5 +1,5 @@
 import axios from "axios";
-import setAuthToken from "../utils.js";
+import setAuthToken from "../../config/setAuthToken";
 // import { setAlert } from "./alerts";
 // import { clearProfile } from "./profile";
 import {
@@ -70,13 +70,13 @@ export const register =
       //   dispatch(loadUser());
     } catch (err) {
       // errors will be an array of objs
-
+      console.log(err);
       const errors = err.response?.data?.errors;
-      if (errors) {
-        errors.forEach((error) => {
-          dispatch(setAlert("danger", error.msg));
-        });
-      }
+      // if (errors) {
+      //   errors.forEach((error) => {
+      //     dispatch(setAlert("danger", error.msg));
+      //   });
+      // }
       dispatch({
         type: REGISTRATION_FAILURE,
         payload: errors,
