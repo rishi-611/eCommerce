@@ -6,7 +6,7 @@ import { login } from "../store/actions/userActions";
 import "../assets/css/auth.css";
 const Login = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  // const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   // console.log(isLoggedIn);
 
   const [formData, setFormData] = useState({
