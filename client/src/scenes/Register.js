@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../store/actions/userActions";
+import { Navigate } from "react-router-dom";
 
 import "../assets/css/auth.css";
 
 const Register = () => {
   const dispatch = useDispatch();
-  // const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  // console.log(isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -28,6 +28,8 @@ const Register = () => {
     console.log(formData);
     dispatch(register(formData));
   };
+
+  if (isLoggedIn) return <Navigate to="/profile" />;
 
   return (
     <div className="container">

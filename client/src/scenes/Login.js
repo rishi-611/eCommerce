@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../store/actions/userActions";
+import { Navigate } from "react-router-dom";
 
 import "../assets/css/auth.css";
 const Login = () => {
   const dispatch = useDispatch();
-  // const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  // console.log(isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -25,6 +25,8 @@ const Login = () => {
     console.log(formData);
     dispatch(login(formData));
   };
+
+  if (isLoggedIn) return <Navigate to="/profile" />;
 
   return (
     <div className="container">
