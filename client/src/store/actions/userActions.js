@@ -10,24 +10,27 @@ import {
   USER_LOADED,
   AUTH_FAILURE,
   LOG_OUT,
+  LOAD_USER_FAILED,
 } from "../constants.js";
 
 // will be called when app first loads
 // sets up global axios header if localstorage already has token
 // fetches user data=>will fail if no token
 export const loadUser = () => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
+  let token = localStorage.getItem("token");
+  if (token) {
+    setAuthToken(token);
   }
   try {
     const res = await axios.get("/api/users/me");
     dispatch({
       type: USER_LOADED,
-      payload: res.data,
+      payload: { user: res.data, token },
     });
   } catch (err) {
     dispatch({
-      type: AUTH_FAILURE,
+      type: LOAD_USER_FAILED,
+      payload: err.response,
     });
   }
 };

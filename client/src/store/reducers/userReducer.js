@@ -12,6 +12,7 @@ const userReducer = (state = initialState, action) => {
   switch (type) {
     case types.REGISTRATION_FAILURE:
     case types.LOGIN_FAILURE:
+    case types.LOAD_USER_FAILED:
       return {
         ...state,
         user: null,
@@ -23,6 +24,7 @@ const userReducer = (state = initialState, action) => {
 
     case types.REGISTRATION_SUCCESS:
     case types.LOGIN_SUCCESS:
+    case types.USER_LOADED:
       return {
         ...state,
         user: payload.user,

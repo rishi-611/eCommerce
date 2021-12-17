@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
@@ -11,7 +11,21 @@ import Login from "./scenes/Login";
 import Register from "./scenes/Register";
 import Logout from "./components/Logout";
 
+import store from "./store/store";
+import { loadUser } from "./store/actions/userActions";
+import setAuthToken from "./config/setAuthToken";
+
+// this avoids bugs caused by profile getting loaded before user
+// useEffect of child comes before useEffect of parent
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
 const App = () => {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+
   return (
     <React.Fragment>
       <BrowserRouter>

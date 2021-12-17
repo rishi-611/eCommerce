@@ -43,3 +43,5 @@ export const LOG_OUT = "LOG_OUT";
 export const GET_PROFILE_SUCCESS = "GET_PROFILE_SUCCESS";
 
 export const GET_PROFILE_ERROR = "PROFILE_ERROR";
+
+export const LOAD_USER_FAILED = "LOAD_USER_FAILED";
