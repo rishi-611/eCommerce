@@ -1,6 +1,6 @@
 import User from "../db/models/User.js";
 import { validationResult } from "express-validator";
-import { ObjectId } from "mongodb";
+import bcrypt from "bcrypt";
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -54,5 +54,46 @@ export const getUserDetails = async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: err });
+  }
+};
+
+export const editUser = async (req, res) => {
+  //expecting name or/and (current + new password) in body
+
+  //if only name, update name and save,
+  //if only pass, verify current pass, then update pass,
+  // if both, then do both processes
+
+  try {
+    const user = req.user;
+    const { name, currPass, newPass } = req.body;
+
+    if (!name && !newPass) throw new Error("Request body empty");
+
+    if (newPass && !currPass) {
+      //error will be handled in errorhandler middleware
+      throw new Error("current password must be provided to update password");
+    }
+
+    if (newPass && currPass) {
+      //first verify if currPass is correct
+      const isPasswordCorrect = await bcrypt.compare(currPass, user.password);
+      if (!isPasswordCorrect) {
+        throw new Error("Password incorrect.");
+      }
+
+      user.password = newPass;
+    }
+
+    if (name) {
+      user.name = name;
+    }
+
+    await user.save();
+
+    return res.json(user);
+  } catch (error) {
+    console.log(error);
+    return res.json({ error: error.message });
   }
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Image } from "react-bootstrap";
 
 const Profile = () => {
   const { user, isLoggedIn } = useSelector((state) => state.user);
