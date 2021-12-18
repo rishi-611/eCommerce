@@ -10,6 +10,7 @@ import {
 
 const userRouter = express.Router();
 
+//register new user
 userRouter.route("/").post(
   [
     check("name", "You must provide a name").notEmpty(),
@@ -21,8 +22,10 @@ userRouter.route("/").post(
   registerUser
 );
 
+//login existing user
 userRouter.route("/login").post(loginUser);
 
+//get user details
 userRouter.route("/me").get(auth, getUserDetails);
 
 export default userRouter;

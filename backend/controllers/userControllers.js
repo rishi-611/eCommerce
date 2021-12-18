@@ -1,5 +1,6 @@
 import User from "../db/models/User.js";
 import { validationResult } from "express-validator";
+import { ObjectId } from "mongodb";
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;

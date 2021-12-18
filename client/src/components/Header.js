@@ -8,9 +8,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
-  useEffect(() => {
-    console.log("logged in: " + isLoggedIn);
-  }, [isLoggedIn]);
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>

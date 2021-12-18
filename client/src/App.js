@@ -10,6 +10,7 @@ import Cart from "./scenes/Cart";
 import Login from "./scenes/Login";
 import Register from "./scenes/Register";
 import Logout from "./components/Logout";
+import Profile from "./scenes/Profile";
 
 import store from "./store/store";
 import { loadUser } from "./store/actions/userActions";
@@ -40,6 +41,7 @@ const App = () => {
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/logout" element={<Logout />} />
               <Route exact path="/register" element={<Register />} />
+              <Route exact path="/profile" element={<Profile />} />
             </Routes>
           </Container>
         </main>
