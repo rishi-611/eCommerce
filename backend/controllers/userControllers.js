@@ -82,6 +82,8 @@ export const editUser = async (req, res) => {
         throw new Error("Password incorrect.");
       }
 
+      if (newPass.length < 6) throw new Error("New password too short");
+
       user.password = newPass;
     }
 
