@@ -31,7 +31,7 @@ input[type="email"] {
   outline: 0;
   margin-bottom: 20px;
   /* padding-left: 0px; */
-  color: #ecf0f5;
+  /* color: #ecf0f5; */
 }
 
 input[type="password"] {
@@ -44,12 +44,22 @@ input[type="password"] {
   outline: 0;
   /* padding-left: 0px; */
   margin-bottom: 20px;
-  color: #ecf0f5;
+  /* color: #ecf0f5; */
 }
 
 .form-group {
   margin-bottom: 40px;
   outline: 0px;
+}
+
+.profile-form-box label {
+  display: block;
+  text-align: left;
+}
+
+.profile-form-box .form-control {
+  display: initial;
+  width: calc(100% - 100px);
 }
 
 .form-control:focus {
@@ -59,7 +69,7 @@ input[type="password"] {
   border-bottom: 2px solid #0db8de;
   outline: 0;
   /* background-color: #1a2226; */
-  color: #ecf0f5;
+  /* color: #ecf0f5; */
 }
 
 input:focus {
@@ -73,7 +83,7 @@ label {
 
 .form-control-label {
   font-size: 10px;
-  color: #6c6c6c;
+  color: #474747;
   font-weight: bold;
   letter-spacing: 1px;
 }
