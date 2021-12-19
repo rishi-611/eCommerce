@@ -34,6 +34,15 @@ const userReducer = (state = initialState, action) => {
         error: null,
       };
 
+    case types.EDIT_USERNAME_SUCCESS:
+    case types.EDIT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        user: payload.user,
+        loading: false,
+        error: null,
+      };
+
     case types.LOG_OUT:
       return {
         ...state,

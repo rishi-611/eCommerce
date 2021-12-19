@@ -8,9 +8,12 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   USER_LOADED,
-  AUTH_FAILURE,
   LOG_OUT,
   LOAD_USER_FAILED,
+  EDIT_USERNAME_SUCCESS,
+  EDIT_USERNAME_FAILURE,
+  EDIT_PASSWORD_SUCCESS,
+  EDIT_PASSWORD_FAILURE,
 } from "../constants.js";
 
 // will be called when app first loads
@@ -137,6 +140,54 @@ export const logout = () => {
   return {
     type: LOG_OUT,
   };
+};
+
+export const editUserName = (name) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "Application/json",
+      },
+    };
+    const body = {
+      name,
+    };
+    const { data } = await axios.put("/api/users/me", config, body);
+
+    return dispatch({
+      type: EDIT_USERNAME_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error.response);
+    return dispatch({
+      type: EDIT_USERNAME_FAILURE,
+      payload: error.response,
+    });
+  }
+};
+
+export const editPassword = (passForm) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "Application/json",
+      },
+    };
+    const body = passForm;
+    const { data } = await axios.put("/api/users/me", config, body);
+
+    return dispatch({
+      type: EDIT_PASSWORD_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error.response);
+    return dispatch({
+      type: EDIT_PASSWORD_FAILURE,
+      payload: error.response,
+    });
+  }
 };
 
 // export const deleteAccount = (history) => async (dispatch) => {
