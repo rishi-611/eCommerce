@@ -180,8 +180,8 @@ export const editPassword = (passForm) => async (dispatch) => {
       },
     };
     const body = passForm;
-    const { data } = await axios.put("/api/users/me", config, body);
-
+    const { data } = await axios.put("/api/users/me", body, config);
+    console.log(data);
     return dispatch({
       type: EDIT_PASSWORD_SUCCESS,
       payload: data,
