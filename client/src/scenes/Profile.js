@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import { Image, Form, Button } from "react-bootstrap";
 
 import { editUserName, editPassword } from "../store/actions/userActions";
+import { setAlert } from "../store/actions/alertActions";
 
 const Profile = () => {
   const { user, isLoggedIn } = useSelector((state) => state.user);
@@ -27,8 +28,9 @@ const Profile = () => {
     const { newPass, newPass2 } = passForm;
 
     if (newPass != newPass2) {
-      return console.log("pass unmatch");
-      // return displayAlert("Passwords must match", "danger");
+      return dispatch(
+        setAlert("danger", "Passwords do not match. Please try again!")
+      );
     }
 
     dispatch(editPassword(passForm));

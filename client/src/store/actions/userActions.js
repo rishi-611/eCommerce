@@ -1,7 +1,5 @@
 import axios from "axios";
 import setAuthToken from "../../config/setAuthToken";
-// import { setAlert } from "./alerts";
-// import { clearProfile } from "./profile";
 import {
   REGISTRATION_FAILURE,
   REGISTRATION_SUCCESS,
@@ -155,16 +153,18 @@ export const editUserName = (name) => async (dispatch) => {
       name,
     };
     const { data } = await axios.put("/api/users/me", body, config);
-    // console.log(data);
-    console.log(data);
-    // dispatch(setAlert("success", "Your Name has been updated successfully!"));
+    dispatch(setAlert("success", "Your Name has been updated successfully!"));
 
     return dispatch({
       type: EDIT_USERNAME_SUCCESS,
       payload: data,
     });
   } catch (error) {
-    console.log(error.response);
+    const msg =
+      error.response?.error ||
+      "Could not update username. Please try again later";
+
+    dispatch(setAlert("danger", msg));
     return dispatch({
       type: EDIT_USERNAME_FAILURE,
       payload: error.response,
@@ -181,13 +181,20 @@ export const editPassword = (passForm) => async (dispatch) => {
     };
     const body = passForm;
     const { data } = await axios.put("/api/users/me", body, config);
-    console.log(data);
+    dispatch(
+      setAlert("success", "Your password has been updated successfully!")
+    );
+
     return dispatch({
       type: EDIT_PASSWORD_SUCCESS,
       payload: data,
     });
   } catch (error) {
-    console.log(error.response);
+    const msg =
+      error.response?.data?.error ||
+      "Could not update password. Please try again later";
+
+    dispatch(setAlert("danger", msg));
     return dispatch({
       type: EDIT_PASSWORD_FAILURE,
       payload: error.response,

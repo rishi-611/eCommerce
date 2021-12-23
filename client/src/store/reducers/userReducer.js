@@ -43,6 +43,14 @@ const userReducer = (state = initialState, action) => {
         error: null,
       };
 
+    case types.EDIT_USERNAME_FAILURE:
+    case types.EDIT_PASSWORD_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      };
+
     case types.LOG_OUT:
       return {
         ...state,

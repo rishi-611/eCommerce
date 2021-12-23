@@ -72,17 +72,20 @@ export const editUser = async (req, res) => {
 
     if (newPass && !currPass) {
       //error will be handled in errorhandler middleware
-      throw new Error("current password must be provided to update password");
+      throw new Error(
+        "Current password field is empty. You must verify that it's you!"
+      );
     }
 
     if (newPass && currPass) {
       //first verify if currPass is correct
       const isPasswordCorrect = await bcrypt.compare(currPass, user.password);
       if (!isPasswordCorrect) {
-        throw new Error("Password incorrect.");
+        throw new Error("Current Password incorrect! You must verify its you!");
       }
 
-      if (newPass.length < 6) throw new Error("New password too short");
+      if (newPass.length < 6)
+        throw new Error("Password must be atleast 6 characters long");
 
       user.password = newPass;
     }
@@ -96,6 +99,6 @@ export const editUser = async (req, res) => {
     return res.json(user);
   } catch (error) {
     console.log(error);
-    return res.json({ error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
