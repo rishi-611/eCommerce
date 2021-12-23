@@ -11,6 +11,7 @@ import Login from "./scenes/Login";
 import Register from "./scenes/Register";
 import Logout from "./components/Logout";
 import Profile from "./scenes/Profile";
+import AlertFloat from "./components/AlertFloat";
 
 import store from "./store/store";
 import { loadUser } from "./store/actions/userActions";
@@ -33,6 +34,7 @@ const App = () => {
         <Header />
         <main>
           <Container>
+            <AlertFloat></AlertFloat>
             <Routes>
               <Route exact path="/" element={<Products />} />
               <Route exact path="/products/:id" element={<Product />} />

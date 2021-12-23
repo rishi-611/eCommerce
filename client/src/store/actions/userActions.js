@@ -16,6 +16,8 @@ import {
   EDIT_PASSWORD_FAILURE,
 } from "../constants.js";
 
+import { setAlert } from "./alertActions";
+
 // will be called when app first loads
 // sets up global axios header if localstorage already has token
 // fetches user data=>will fail if no token
@@ -152,7 +154,10 @@ export const editUserName = (name) => async (dispatch) => {
     const body = {
       name,
     };
-    const { data } = await axios.put("/api/users/me", config, body);
+    const { data } = await axios.put("/api/users/me", body, config);
+    // console.log(data);
+    console.log(data);
+    // dispatch(setAlert("success", "Your Name has been updated successfully!"));
 
     return dispatch({
       type: EDIT_USERNAME_SUCCESS,

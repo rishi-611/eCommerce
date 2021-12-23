@@ -38,7 +38,7 @@ const userReducer = (state = initialState, action) => {
     case types.EDIT_PASSWORD_SUCCESS:
       return {
         ...state,
-        user: payload.user,
+        user: payload,
         loading: false,
         error: null,
       };

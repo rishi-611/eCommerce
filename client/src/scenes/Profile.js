@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Image, Form, Button } from "react-bootstrap";
+
+import { editUserName, editPassword } from "../store/actions/userActions";
 
 const Profile = () => {
   const { user, isLoggedIn } = useSelector((state) => state.user);
@@ -17,18 +19,19 @@ const Profile = () => {
 
   const handleNameSubmit = (e) => {
     e.preventDefault();
-    console.log(name);
+    dispatch(editUserName(name));
   };
 
   const handlePassForm = (e) => {
     e.preventDefault();
-    const { currPass, newPass, newPass2 } = passForm;
+    const { newPass, newPass2 } = passForm;
 
     if (newPass != newPass2) {
-      return console.log("Passwords must match");
+      return console.log("pass unmatch");
+      // return displayAlert("Passwords must match", "danger");
     }
 
-    console.log(passForm);
+    dispatch(editPassword(passForm));
   };
 
   if (!isLoggedIn) return <Navigate to="/login" />;
