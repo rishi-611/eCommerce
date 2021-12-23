@@ -123,6 +123,9 @@ export const login =
         },
       });
     } catch (err) {
+      const msg =
+        err.response?.data?.errors || "Failed to login. Please try again!";
+      dispatch(setAlert("danger", msg));
       dispatch({
         type: LOGIN_FAILURE,
         payload: err.response,

@@ -11,7 +11,9 @@ export const loginUser = async (req, res) => {
   }
   const user = await User.findByCredentials(email, password);
   if (!user) {
-    return res.status(400).json({ errors: "Invalid Credentials" });
+    return res
+      .status(400)
+      .json({ errors: "Invalid Credentials! Please try again." });
   }
 
   const token = await user.getAuthToken();
