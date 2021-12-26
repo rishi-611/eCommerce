@@ -15,11 +15,20 @@ if (!cartItems) {
   cartItems = JSON.parse(cartItems);
 }
 
+//initial setup for shipping address
+let address = localStorage.getItem("address");
+if (!address) {
+  address = {};
+} else {
+  address = JSON.parse(address);
+}
+
 const initialState = {
   cart: {
     loading: false,
     error: null,
     cartItems,
+    address,
   },
 };
 

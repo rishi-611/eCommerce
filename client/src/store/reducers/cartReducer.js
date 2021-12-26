@@ -4,6 +4,7 @@ const initialState = {
   cartItems: [],
   error: null,
   loading: false,
+  address: {},
 };
 
 //cart items will contain a list of products that are added to cart by user
@@ -21,7 +22,6 @@ const cartReducer = (state = initialState, action) => {
       };
 
     case types.ADD_TO_CART_SUCCESS:
-      console.log("adding to cart");
       //if product already exists in list, update it with new one, if it doesnt, push it to end
       const existingProduct = state.cartItems.find(
         (product) => product.productId === payload.productId
@@ -34,8 +34,6 @@ const cartReducer = (state = initialState, action) => {
           loading: false,
         };
       } else {
-        console.log("updating product");
-        console.log(payload);
         return {
           ...state,
           cartItems: state.cartItems.map((product) =>
@@ -59,6 +57,12 @@ const cartReducer = (state = initialState, action) => {
         cartItems: state.cartItems.filter(
           (item) => item.productId !== payload.productId
         ),
+      };
+
+    case types.CART_SAVE_ADDRESS:
+      return {
+        ...state,
+        address: payload,
       };
     default:
       return state;

@@ -68,3 +68,14 @@ export const removeFromCart = (productId) => (dispatch, getState) => {
   //update localstorage from newly updated state cart
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
+
+export const saveAddress = (address) => (dispatch) => {
+  //save address in localstorage
+  localStorage.setItem("address", JSON.stringify(address));
+
+  //save address in redux store
+  dispatch({
+    type: types.CART_SAVE_ADDRESS,
+    payload: address,
+  });
+};
