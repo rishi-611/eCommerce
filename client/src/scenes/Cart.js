@@ -2,10 +2,19 @@ import React, { useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import qs from "query-string";
-import { Row, Col, Image, ListGroup, Button, Form } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Card,
+  Image,
+  ListGroup,
+  Button,
+  Form,
+} from "react-bootstrap";
 import { addToCart, removeFromCart } from "../store/actions/cartActions";
 import Alert from "../components/Alert";
 import GoBack from "../components/GoBack";
+import { LinkContainer } from "react-router-bootstrap";
 
 const Cart = () => {
   const { id } = useParams();
@@ -33,7 +42,6 @@ const Cart = () => {
       </React.Fragment>
     );
   }
-
   //else show cart
   return (
     <React.Fragment>
@@ -86,7 +94,41 @@ const Cart = () => {
             ))}
           </ListGroup>
         </Col>
-        <Col md="4"></Col>
+        <Col md="4">
+          <Card>
+            <ListGroup variant="flush">
+              <ListGroup.Item>
+                <h3 className="cart-subtotal py-2">
+                  Subtotal for{" "}
+                  {parseInt(
+                    cartItems.reduce((acc, item) => acc + Number(item.qty), 0),
+                    10
+                  )}{" "}
+                  items
+                </h3>
+              </ListGroup.Item>
+              <ListGroup.Item className="py-1">
+                $
+                {cartItems
+                  .reduce(
+                    (acc, item) => acc + Number(item.qty) * Number(item.price),
+                    0
+                  )
+                  .toFixed(2)}
+              </ListGroup.Item>
+              <ListGroup.Item className="py-3">
+                <LinkContainer to="/shipping" style={{ width: "100%" }}>
+                  <Button
+                    className="btn-block"
+                    disabled={cartItems.length === 0}
+                  >
+                    Proceed to Check Out
+                  </Button>
+                </LinkContainer>
+              </ListGroup.Item>
+            </ListGroup>{" "}
+          </Card>
+        </Col>
       </Row>
     </React.Fragment>
   );

@@ -16,6 +16,7 @@ import AlertFloat from "./components/AlertFloat";
 import store from "./store/store";
 import { loadUser } from "./store/actions/userActions";
 import setAuthToken from "./config/setAuthToken";
+import Shipping from "./scenes/Shipping";
 
 // this avoids bugs caused by profile getting loaded before user
 // useEffect of child comes before useEffect of parent
@@ -44,6 +45,7 @@ const App = () => {
               <Route exact path="/logout" element={<Logout />} />
               <Route exact path="/register" element={<Register />} />
               <Route exact path="/profile" element={<Profile />} />
+              <Route exact path="/shipping" element={<Shipping />} />
             </Routes>
           </Container>
         </main>
