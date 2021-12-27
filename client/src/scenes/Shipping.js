@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import { saveAddress } from "../store/actions/cartActions";
@@ -11,6 +11,7 @@ import "../assets/css/shipping.css";
 const Shipping = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const initialAdress = useSelector((state) => state.cart.address);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const [address, setAddress] = useState({
@@ -30,14 +31,17 @@ const Shipping = () => {
     dispatch(saveAddress(address));
 
     //navigate to next page
+    navigate("/payment");
   };
 
   if (!isLoggedIn) return <Navigate to="/login?to=shipping" />;
 
   return (
-    <div className="shipping">
+    <React.Fragment>
       <Progress step1 step2 />
       <FormContainer>
+        <h3 className="form-header text-center mb-2">Add Shipping Address</h3>
+
         <Form className="form-group" onSubmit={handleSubmit}>
           <Form.Group className="mb-2">
             <Form.Label>Street</Form.Label>
@@ -117,7 +121,7 @@ const Shipping = () => {
           </div>
         </Form>
       </FormContainer>
-    </div>
+    </React.Fragment>
   );
 };
 
