@@ -31,7 +31,7 @@ const Shipping = () => {
     //navigate to next page
   };
 
-  if (!isLoggedIn) return <Navigate to="/login" />;
+  if (!isLoggedIn) return <Navigate to="/login?to=shipping" />;
 
   return (
     <div className="shipping">

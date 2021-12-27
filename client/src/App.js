@@ -12,11 +12,11 @@ import Register from "./scenes/Register";
 import Logout from "./components/Logout";
 import Profile from "./scenes/Profile";
 import AlertFloat from "./components/AlertFloat";
+import Shipping from "./scenes/Shipping";
 
 import store from "./store/store";
 import { loadUser } from "./store/actions/userActions";
 import setAuthToken from "./config/setAuthToken";
-import Shipping from "./scenes/Shipping";
 
 // this avoids bugs caused by profile getting loaded before user
 // useEffect of child comes before useEffect of parent

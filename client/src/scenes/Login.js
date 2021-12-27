@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import qs from "query-string";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../store/actions/userActions";
 import { Navigate } from "react-router-dom";
@@ -7,6 +8,8 @@ import { Navigate } from "react-router-dom";
 import "../assets/css/auth.css";
 const Login = () => {
   const dispatch = useDispatch();
+  const { search } = useLocation();
+  const to = "/" + (qs.parse(search).to || "");
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const [formData, setFormData] = useState({
@@ -25,7 +28,8 @@ const Login = () => {
     dispatch(login(formData));
   };
 
-  if (isLoggedIn) return <Navigate to="/profile" />;
+  //if desired redirect location is provided in query, redirect to that page, otherwise redirect to default products page
+  if (isLoggedIn) return <Navigate to={to} />;
 
   return (
     <div className="container">

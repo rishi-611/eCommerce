@@ -21,6 +21,7 @@ const Cart = () => {
   const { search } = useLocation();
   const dispatch = useDispatch();
   const { cartItems, error, loading } = useSelector((state) => state.cart);
+  const { isLoggedIn } = useSelector((state) => state.user);
   useEffect(() => {
     //get qty from query, default quantity is 1
     const { qty } = qs.parse(search) || 1;
@@ -117,7 +118,10 @@ const Cart = () => {
                   .toFixed(2)}
               </ListGroup.Item>
               <ListGroup.Item className="py-3">
-                <LinkContainer to="/shipping" style={{ width: "100%" }}>
+                <LinkContainer
+                  to={isLoggedIn ? "/shipping" : "/login?to=shipping"}
+                  style={{ width: "100%" }}
+                >
                   <Button
                     className="btn-block"
                     disabled={cartItems.length === 0}
