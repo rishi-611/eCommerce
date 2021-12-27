@@ -5,6 +5,7 @@ const initialState = {
   error: null,
   loading: false,
   address: {},
+  paymentMethod: "paypal",
 };
 
 //cart items will contain a list of products that are added to cart by user
@@ -63,6 +64,12 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         address: payload,
+      };
+
+    case types.CART_SAVE_PAYMENT_METHOD:
+      return {
+        ...state,
+        paymentMethod: payload,
       };
     default:
       return state;

@@ -79,3 +79,14 @@ export const saveAddress = (address) => (dispatch) => {
     payload: address,
   });
 };
+
+export const savePaymentMethod = (method) => (dispatch) => {
+  //save method in localstorage
+  localStorage.setItem("paymentMethod", method);
+
+  //save method in redux store
+  dispatch({
+    type: types.CART_SAVE_ADDRESS,
+    payload: method,
+  });
+};

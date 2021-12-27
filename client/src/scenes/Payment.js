@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import FormContainer from "../components/FormContainer";
 import { Form } from "react-bootstrap";
 import Progress from "../components/Progress";
+import { useSelector, useDispatch } from "react-redux";
+import { savePaymentMethod } from "../store/actions/cartActions";
 
 const Payment = () => {
-  const [method, setMethod] = useState("paypal");
+  const dispatch = useDispatch();
+  const defaultMethod = useSelector((state) => state.cart.paymentMethod);
+  const [method, setMethod] = useState(defaultMethod);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    dispatch(savePaymentMethod(method));
   };
   return (
     <React.Fragment>
@@ -24,6 +30,7 @@ const Payment = () => {
               name="method"
               value="paypal"
               onChange={(e) => setMethod(e.target.value)}
+              checked={method == "paypal" ? true : false}
             />
             <Form.Check
               type="radio"
@@ -32,6 +39,7 @@ const Payment = () => {
               name="method"
               value="upi"
               onChange={(e) => setMethod(e.target.value)}
+              checked={method == "upi" ? true : false}
             />
           </Form.Group>
           <div className="d-grid gap-2 mt-3">
