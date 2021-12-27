@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import { saveAddress } from "../store/actions/cartActions";
+import Progress from "../components/Progress";
 
 import "../assets/css/shipping.css";
 
@@ -35,6 +36,7 @@ const Shipping = () => {
 
   return (
     <div className="shipping">
+      <Progress step1 step2 />
       <FormContainer>
         <Form className="form-group" onSubmit={handleSubmit}>
           <Form.Group className="mb-2">
