@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Image, Form, Button } from "react-bootstrap";
+import FormContainer from "../components/FormContainer";
 
 import { editUserName, editPassword } from "../store/actions/userActions";
 import { setAlert } from "../store/actions/alertActions";
@@ -39,7 +40,7 @@ const Profile = () => {
   if (!isLoggedIn) return <Navigate to="/login" />;
 
   return (
-    <React.Fragment>
+    <FormContainer>
       <div className="row bg-primary p-4">
         <div className="col-12 col-sm-4 d-flex justify-content-center align-items-center">
           <Image
@@ -133,7 +134,7 @@ const Profile = () => {
           </Form.Group>
         </Form>
       </div>
-    </React.Fragment>
+    </FormContainer>
   );
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { Row, Col, ListGroup, Card, Image } from "react-bootstrap";
+import { Row, Col, ListGroup, Card, Image, Button } from "react-bootstrap";
+// import { LinkContainer } from "react-router-bootstrap";
 import { useSelector } from "react-redux";
 import Progress from "../components/Progress";
 
@@ -54,7 +55,51 @@ const PlaceOrder = () => {
           </ListGroup.Item>
         </ListGroup>
       </div>
-      <div className="col-12 col-sm-4">Summary</div>
+      <div className="col-12 col-sm-4">
+        <Card>
+          <ListGroup variant="flush">
+            <ListGroup.Item>
+              <h3>Order Summary</h3>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <Row>
+                {" "}
+                <Col>Items:</Col>
+                <Col className="text-end">
+                  $
+                  {cartItems
+                    .reduce(
+                      (acc, item) =>
+                        acc + Number(item.qty) * Number(item.price),
+                      0
+                    )
+                    .toFixed(2)}
+                </Col>
+              </Row>
+            </ListGroup.Item>
+            <ListGroup.Item className="py-2">
+              <Row>
+                <Col>Tax:</Col>
+                <Col className="text-end"> $0.00</Col>
+              </Row>
+            </ListGroup.Item>
+            <ListGroup.Item className="py-2">
+              <Row>
+                <Col>Delivery:</Col>
+                <Col className="text-end"> $0.00</Col>
+              </Row>
+            </ListGroup.Item>
+            <ListGroup.Item className="py-3">
+              {" "}
+              <div className="d-grid gap-2 mt-3">
+                <button className="btn btn-primary" type="submit">
+                  Continue
+                </button>
+              </div>
+            </ListGroup.Item>
+          </ListGroup>{" "}
+        </Card>
+      </div>
     </Row>
   );
 };
