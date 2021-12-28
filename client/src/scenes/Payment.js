@@ -4,16 +4,19 @@ import { Form } from "react-bootstrap";
 import Progress from "../components/Progress";
 import { useSelector, useDispatch } from "react-redux";
 import { savePaymentMethod } from "../store/actions/cartActions";
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
   const dispatch = useDispatch();
   const defaultMethod = useSelector((state) => state.cart.paymentMethod);
   const [method, setMethod] = useState(defaultMethod);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     dispatch(savePaymentMethod(method));
+    navigate("/placeOrder");
   };
   return (
     <React.Fragment>

@@ -86,7 +86,7 @@ export const savePaymentMethod = (method) => (dispatch) => {
 
   //save method in redux store
   dispatch({
-    type: types.CART_SAVE_ADDRESS,
+    type: types.CART_SAVE_PAYMENT_METHOD,
     payload: method,
   });
 };
