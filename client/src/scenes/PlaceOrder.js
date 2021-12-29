@@ -1,13 +1,22 @@
 import React from "react";
-import { Row, Col, ListGroup, Card, Image, Button } from "react-bootstrap";
+import { Row, Col, ListGroup, Card, Image } from "react-bootstrap";
 // import { LinkContainer } from "react-router-bootstrap";
 import { useSelector } from "react-redux";
 import Progress from "../components/Progress";
+import { LinkContainer } from "react-router-bootstrap";
 
 const PlaceOrder = () => {
   const { address, paymentMethod, cartItems } = useSelector(
     (state) => state.cart
   );
+
+  const itemPrice = cartItems.reduce(
+    (acc, item) => acc + Number(item.qty) * Number(item.price),
+    0
+  );
+
+  const deliveryPrice = itemPrice > 20 ? 0 : 10;
+  const totalPrice = itemPrice + deliveryPrice;
 
   return (
     <Row>
@@ -32,15 +41,19 @@ const PlaceOrder = () => {
                 <ListGroup.Item key={item.productId}>
                   <Row>
                     <Col className="col-12 col-sm-2 d-flex justify-content-center align-items-center">
-                      <Image
-                        src={item.image}
-                        alt={`image of ${item.name}`}
-                        fluid
-                        thumbnail
-                      />
+                      <LinkContainer to={`/products/${item.productId}`}>
+                        <Image
+                          src={item.image}
+                          alt={`image of ${item.name}`}
+                          fluid
+                          thumbnail
+                        />
+                      </LinkContainer>
                     </Col>
                     <Col className="col-12 col-sm-4  d-flex justify-content-center  align-items-center py-2 px-sm-2 ">
-                      <p className="text-center text-sm-start">{item.name}</p>
+                      <LinkContainer to={`/products/${item.productId}`}>
+                        <p className="text-center text-sm-start">{item.name}</p>
+                      </LinkContainer>
                     </Col>
                     <Col className="col-12 col-sm-6  d-flex justify-content-center justify-content-sm-end align-items-center">
                       <p className="text-center">
@@ -65,28 +78,20 @@ const PlaceOrder = () => {
               <Row>
                 {" "}
                 <Col>Items:</Col>
-                <Col className="text-end">
-                  $
-                  {cartItems
-                    .reduce(
-                      (acc, item) =>
-                        acc + Number(item.qty) * Number(item.price),
-                      0
-                    )
-                    .toFixed(2)}
-                </Col>
+                <Col className="text-end">${itemPrice.toFixed(2)}</Col>
               </Row>
             </ListGroup.Item>
-            <ListGroup.Item className="py-2">
-              <Row>
-                <Col>Tax:</Col>
-                <Col className="text-end"> $0.00</Col>
-              </Row>
-            </ListGroup.Item>
+
             <ListGroup.Item className="py-2">
               <Row>
                 <Col>Delivery:</Col>
-                <Col className="text-end"> $0.00</Col>
+                <Col className="text-end"> ${deliveryPrice.toFixed(2)}</Col>
+              </Row>
+            </ListGroup.Item>
+            <ListGroup.Item className="py-2">
+              <Row>
+                <Col>Total:</Col>
+                <Col className="text-end"> ${totalPrice.toFixed(2)}</Col>
               </Row>
             </ListGroup.Item>
             <ListGroup.Item className="py-3">
