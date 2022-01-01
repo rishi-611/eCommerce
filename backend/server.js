@@ -3,6 +3,7 @@ import chalk from "chalk";
 
 import productsRoute from "./routes/productsRoute.js";
 import userRouter from "./routes/userRouter.js";
+import orderRouter from "./routes/orderRoutes.js";
 
 import "./db/setupDB.js";
 import { errorHandler, notFound } from "./middlewares/errorMiddlewars.js";
@@ -17,6 +18,7 @@ app.use(express.json());
 // routes
 app.use("/api/products", productsRoute);
 app.use("/api/users", userRouter);
+app.use("/api/orders", orderRouter);
 
 app.use(notFound);
 app.use(errorHandler);
