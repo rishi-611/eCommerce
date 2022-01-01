@@ -15,7 +15,7 @@ export const placeOrder = (orderForm) => async (dispatch) => {
     };
     const body = orderForm;
 
-    const { data } = await axios.post("/orders", body, config);
+    const { data } = await axios.post("/api/orders", body, config);
 
     return dispatch({
       type: types.PLACE_ORDER_SUCCESS,

@@ -20,11 +20,13 @@ export const createOrder = async (req, res) => {
   });
 
   try {
-    await Order.save(order);
+    await order.save();
     return res.status(201).json(order);
   } catch (err) {
-    return res
-      .status(500)
-      .json({ error: "Failed to confirm order. Please try again later" });
+    console.log(err);
+    return res.status(500).json({
+      message: "Failed to confirm order. Please try again later",
+      error: err,
+    });
   }
 };

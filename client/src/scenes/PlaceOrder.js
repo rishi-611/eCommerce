@@ -1,11 +1,13 @@
 import React from "react";
 import { Row, Col, ListGroup, Card, Image } from "react-bootstrap";
 // import { LinkContainer } from "react-router-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Progress from "../components/Progress";
 import { LinkContainer } from "react-router-bootstrap";
+import { placeOrder } from "../store/actions/orderActions";
 
 const PlaceOrder = () => {
+  const dispatch = useDispatch();
   const { address, paymentMethod, cartItems } = useSelector(
     (state) => state.cart
   );
@@ -17,6 +19,17 @@ const PlaceOrder = () => {
 
   const deliveryPrice = itemPrice > 20 ? 0 : 10;
   const totalPrice = itemPrice + deliveryPrice;
+
+  const handlePlaceOrder = () => {
+    const orderForm = {
+      orderItems: cartItems,
+      shippingAddress: address,
+      paymentMethod,
+      shippingPrice: deliveryPrice,
+      totalPrice,
+    };
+    dispatch(placeOrder(orderForm));
+  };
 
   return (
     <Row>
@@ -97,7 +110,7 @@ const PlaceOrder = () => {
             <ListGroup.Item className="py-3">
               {" "}
               <div className="d-grid gap-2 mt-3">
-                <button className="btn btn-primary" type="submit">
+                <button className="btn btn-primary" onClick={handlePlaceOrder}>
                   Continue
                 </button>
               </div>
