@@ -30,3 +30,36 @@ export const createOrder = async (req, res) => {
     });
   }
 };
+
+export const getOrder = async (req, res) => {
+  const id = req.params.id;
+  if (!id) {
+    return res.status(400).json({
+      message: "Please provide order ID!",
+    });
+  }
+
+  try {
+    //fetch the order by id
+    const order = await Order.findById(id);
+    if (!order) {
+      return res.status(404).json({
+        message: `Order with ID ${id} not found!`,
+      });
+    }
+
+    //check if order belongs to the user
+    if (order._id.toString() !== id) {
+      return res.status(401).json({
+        message: "Authorization Error",
+      });
+    }
+
+    return res.json(order);
+  } catch (error) {
+    return res.status(500).json({
+      error,
+      message: "Failed to fetch order with ID " + id,
+    });
+  }
+};
