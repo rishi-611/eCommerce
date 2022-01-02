@@ -27,6 +27,26 @@ const orderReducer = (state = initialState, { type, payload }) => {
         error: payload,
         order: null,
       };
+    case types.FETCH_ORDER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.FETCH_ORDER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        order: payload,
+      };
+    case types.FETCH_ORDER_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+        order: null,
+      };
+
     default:
       return state;
   }

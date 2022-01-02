@@ -29,3 +29,22 @@ export const placeOrder = (orderForm) => async (dispatch) => {
     });
   }
 };
+
+export const fetchOrder = (id) => async (dispatch) => {
+  dispatch({
+    type: types.FETCH_ORDER_REQUEST,
+  });
+
+  try {
+    const { data } = await axios.get("/api/orders/" + id);
+    return dispatch({
+      type: types.FETCH_ORDER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    return dispatch({
+      type: types.FETCH_ORDER_FAILURE,
+      payload: error.response,
+    });
+  }
+};
