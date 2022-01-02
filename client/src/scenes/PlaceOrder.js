@@ -1,13 +1,14 @@
 import React from "react";
 import { Row, Col, ListGroup, Card, Image } from "react-bootstrap";
-// import { LinkContainer } from "react-router-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import Progress from "../components/Progress";
-import { LinkContainer } from "react-router-bootstrap";
 import { placeOrder } from "../store/actions/orderActions";
+import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { address, paymentMethod, cartItems } = useSelector(
     (state) => state.cart
   );
@@ -28,7 +29,7 @@ const PlaceOrder = () => {
       shippingPrice: deliveryPrice,
       totalPrice,
     };
-    dispatch(placeOrder(orderForm));
+    dispatch(placeOrder(navigate, orderForm));
   };
 
   return (
@@ -111,7 +112,7 @@ const PlaceOrder = () => {
               {" "}
               <div className="d-grid gap-2 mt-3">
                 <button className="btn btn-primary" onClick={handlePlaceOrder}>
-                  Continue
+                  Place Order
                 </button>
               </div>
             </ListGroup.Item>

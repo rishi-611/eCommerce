@@ -2,7 +2,7 @@ import axios from "axios";
 import * as types from "../constants";
 import { setAlert } from "./alertActions";
 
-export const placeOrder = (orderForm) => async (dispatch) => {
+export const placeOrder = (navigate, orderForm) => async (dispatch) => {
   dispatch({
     type: types.PLACE_ORDER_REQUEST,
   });
@@ -16,6 +16,9 @@ export const placeOrder = (orderForm) => async (dispatch) => {
     const body = orderForm;
 
     const { data } = await axios.post("/api/orders", body, config);
+
+    //once order is successfully placed, navigate to order page
+    navigate("/order/" + data._id);
 
     return dispatch({
       type: types.PLACE_ORDER_SUCCESS,

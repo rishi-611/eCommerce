@@ -14,6 +14,7 @@ import Profile from "./scenes/Profile";
 import AlertFloat from "./components/AlertFloat";
 import Shipping from "./scenes/Shipping";
 import PlaceOrder from "./scenes/PlaceOrder";
+import OrderScreen from "./scenes/OrderScreen";
 
 import store from "./store/store";
 import { loadUser } from "./store/actions/userActions";
@@ -50,6 +51,7 @@ const App = () => {
               <Route exact path="/shipping" element={<Shipping />} />
               <Route exact path="/payment" element={<Payment />} />
               <Route exact path="/placeOrder" element={<PlaceOrder />} />
+              <Route exact path="/order/:id" element={<OrderScreen />} />
             </Routes>
           </Container>
         </main>
