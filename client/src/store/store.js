@@ -14,7 +14,7 @@ if (!cartItems) {
   cartItems = JSON.parse(cartItems);
 }
 
-let paymentMethod = localStorage.getItem("paymentMethod") || "paypal";
+let paymentMethod = localStorage.getItem("paymentMethod") || "Debit Card";
 
 //initial setup for shipping address
 let address = localStorage.getItem("address");

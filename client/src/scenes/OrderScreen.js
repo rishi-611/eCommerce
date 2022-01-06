@@ -11,9 +11,8 @@ const OrderScreen = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    //order may already be there, if we come to this screen after placing order,
-    //no need to fetch it again in this case
-    if (!order) {
+    //check if order is already in state, with the same id as in params, in that case, no need to fetch
+    if (!order || order._id !== id) {
       dispatch(fetchOrder(id));
     }
   }, []);

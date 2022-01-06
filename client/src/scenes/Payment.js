@@ -18,6 +18,7 @@ const Payment = () => {
     dispatch(savePaymentMethod(method));
     navigate("/placeOrder");
   };
+
   return (
     <React.Fragment>
       <Progress step1 step2 step3 />
@@ -29,20 +30,20 @@ const Payment = () => {
               type="radio"
               id="payment-paypal"
               className="mb-1"
-              label="PayPal or Debit Card"
+              label="Debit Card"
               name="method"
-              value="paypal"
+              value="Debit Card"
               onChange={(e) => setMethod(e.target.value)}
-              checked={method == "paypal" ? true : false}
+              checked={method == "Debit Card" ? true : false}
             />
             <Form.Check
               type="radio"
               id="payment-paypal"
-              label="UPI"
+              label="Cash On Delivery"
               name="method"
-              value="upi"
+              value="Cash On Delivery"
               onChange={(e) => setMethod(e.target.value)}
-              checked={method == "upi" ? true : false}
+              checked={method == "Cash On Delivery" ? true : false}
             />
           </Form.Group>
           <div className="d-grid gap-2 mt-3">

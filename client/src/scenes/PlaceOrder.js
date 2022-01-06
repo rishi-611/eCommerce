@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Row, Col, ListGroup, Card, Image } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import Progress from "../components/Progress";
-import { placeOrder } from "../store/actions/orderActions";
+import { placeCODOrder } from "../store/actions/orderActions";
 import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
@@ -21,6 +21,27 @@ const PlaceOrder = () => {
   const deliveryPrice = itemPrice > 20 ? 0 : 10;
   const totalPrice = itemPrice + deliveryPrice;
 
+  useEffect(() => {
+    if (
+      !address ||
+      (Object.keys(address).length === 0 && address.constructor === Object)
+    ) {
+      //in case someone clears localstorage after address page, and refreshes
+      navigate("/shipping");
+    }
+  }, [address]);
+
+  const handlePlaceCODOrder = () => {
+    const orderForm = {
+      orderItems: cartItems,
+      shippingAddress: address,
+      paymentMethod,
+      shippingPrice: deliveryPrice,
+      totalPrice,
+    };
+    dispatch(placeCODOrder(navigate, orderForm));
+  };
+
   const handlePlaceOrder = () => {
     const orderForm = {
       orderItems: cartItems,
@@ -29,7 +50,7 @@ const PlaceOrder = () => {
       shippingPrice: deliveryPrice,
       totalPrice,
     };
-    dispatch(placeOrder(navigate, orderForm));
+    console.log(orderForm);
   };
 
   return (
@@ -111,9 +132,21 @@ const PlaceOrder = () => {
             <ListGroup.Item className="py-3">
               {" "}
               <div className="d-grid gap-2 mt-3">
-                <button className="btn btn-primary" onClick={handlePlaceOrder}>
-                  Place Order
-                </button>
+                {paymentMethod === "Cash On Delivery" ? (
+                  <button
+                    className="btn btn-primary"
+                    onClick={handlePlaceCODOrder}
+                  >
+                    Place Order
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-primary"
+                    onClick={handlePlaceOrder}
+                  >
+                    Place Order
+                  </button>
+                )}
               </div>
             </ListGroup.Item>
           </ListGroup>{" "}

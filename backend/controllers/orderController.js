@@ -1,6 +1,7 @@
 import Order from "../db/models/Order.js";
 
-export const createOrder = async (req, res) => {
+//place cod order, default payment status will be false
+export const createCODOrder = async (req, res) => {
   const {
     orderItems,
     shippingAddress,
