@@ -15,6 +15,7 @@ const Shipping = () => {
 
   const dispatch = useDispatch();
   const [address, setAddress] = useState({
+    phoneNumber: initialAdress.phoneNumer || "",
     street: initialAdress.street || "",
     city: initialAdress.city || "",
     state: initialAdress.state || "",
@@ -40,9 +41,23 @@ const Shipping = () => {
     <React.Fragment>
       <Progress step1 step2 />
       <FormContainer>
-        <h3 className="form-header text-center mb-2">Add Shipping Address</h3>
+        <h3 className="form-header text-center mb-2">Add Shipping Details</h3>
 
         <Form className="form-group" onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Phone Number</Form.Label>
+            <Form.Control
+              type="street"
+              className="form-control"
+              id="phoneNumber"
+              name="phoneNumber"
+              onChange={handleChange}
+              value={address.phoneNumber}
+              placeholder="eg: 987654321"
+              required
+              autoComplete="on"
+            />
+          </Form.Group>
           <Form.Group className="mb-2">
             <Form.Label>Street</Form.Label>
             <Form.Control

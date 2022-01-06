@@ -7,8 +7,10 @@ export const createCODOrder = async (req, res) => {
     shippingAddress,
     paymentMethod,
     shippingPrice,
+    phoneNumber,
     totalPrice,
   } = req.body;
+  console.log(phoneNumber);
 
   const user = req.user._id;
   const order = new Order({
@@ -17,8 +19,10 @@ export const createCODOrder = async (req, res) => {
     shippingAddress,
     paymentMethod,
     shippingPrice,
+    phoneNumber,
     totalPrice,
   });
+  console.log(order);
 
   try {
     await order.save();

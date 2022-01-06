@@ -9,11 +9,13 @@ const initialState = {
 const orderReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.PLACE_ORDER_REQUEST:
+    case types.PLACE_COD_ORDER_REQUEST:
       return {
         ...state,
         loading: true,
       };
     case types.PLACE_ORDER_SUCCESS:
+    case types.PLACE_COD_ORDER_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -21,6 +23,7 @@ const orderReducer = (state = initialState, { type, payload }) => {
         order: payload,
       };
     case types.PLACE_ORDER_FAILURE:
+    case types.PLACE_COD_ORDER_FAILURE:
       return {
         ...state,
         loading: false,

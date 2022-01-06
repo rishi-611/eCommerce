@@ -26,6 +26,7 @@ const Payment = () => {
         <h3 className="form-header text-center mb-2">Select Payment Method</h3>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="my-3">
+            {/*
             <Form.Check
               type="radio"
               id="payment-paypal"
@@ -36,6 +37,7 @@ const Payment = () => {
               onChange={(e) => setMethod(e.target.value)}
               checked={method == "Debit Card" ? true : false}
             />
+            */}
             <Form.Check
               type="radio"
               id="payment-paypal"

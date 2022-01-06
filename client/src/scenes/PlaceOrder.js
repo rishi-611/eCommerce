@@ -37,6 +37,7 @@ const PlaceOrder = () => {
       shippingAddress: address,
       paymentMethod,
       shippingPrice: deliveryPrice,
+      phoneNumber: address.phoneNumber,
       totalPrice,
     };
     dispatch(placeCODOrder(navigate, orderForm));
