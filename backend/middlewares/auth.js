@@ -33,10 +33,10 @@ const auth = async function (req, res, next) {
     req.token = token;
     next();
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
     return res
-      .status(500)
-      .json({ errors: "Server error. Failed to verify user" });
+      .status(err.message === "jwt expired" ? 400 : 500)
+      .json({ errors: err.message });
   }
 };
 

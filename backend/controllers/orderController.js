@@ -10,7 +10,6 @@ export const createCODOrder = async (req, res) => {
     phoneNumber,
     totalPrice,
   } = req.body;
-  console.log(phoneNumber);
 
   const user = req.user._id;
   const order = new Order({
@@ -22,7 +21,6 @@ export const createCODOrder = async (req, res) => {
     phoneNumber,
     totalPrice,
   });
-  console.log(order);
 
   try {
     await order.save();
@@ -36,6 +34,27 @@ export const createCODOrder = async (req, res) => {
   }
 };
 
+//get all orders
+export const getAllOrders = async (req, res) => {
+  const userId = req.user._id;
+  try {
+    //find all orders, whose user is the current user
+    const orders = await Order.find({ user: userId });
+    if (!orders || !orders.length) {
+      return res.status(404).json({
+        message: "You don't have any orders yet!",
+      });
+    }
+    return res.json(orders);
+  } catch (error) {
+    return res.status(500).json({
+      error: error,
+      message: "Failed to fetch orders!",
+    });
+  }
+};
+
+//get order by id
 export const getOrder = async (req, res) => {
   const id = req.params.id;
   if (!id) {
