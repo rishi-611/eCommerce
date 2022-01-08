@@ -27,10 +27,15 @@ const Header = () => {
                     {" "}
                     <i className="fas fa-shopping-cart"></i> Cart{" "}
                   </Nav.Link>
-                  <Nav.Link as={Link} to="/profile">
-                    {" "}
-                    <i className="fas fa-user"></i> Profile{" "}
-                  </Nav.Link>
+                  <NavDropdown title="Profile" id="basic-nav-dropdown">
+                    <NavDropdown.Item as={Link} to="/orders">
+                      Orders
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/profile">
+                      Edit Profile
+                    </NavDropdown.Item>
+                  </NavDropdown>
+
                   <Nav.Link as={Link} to="/logout">
                     {" "}
                     <i className="fas fa-power-off"></i> Logout{" "}
