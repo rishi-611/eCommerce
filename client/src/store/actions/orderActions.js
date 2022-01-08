@@ -72,6 +72,25 @@ export const placeCODOrder = (navigate, orderForm) => async (dispatch) => {
   }
 };
 
+export const fetchAllOrders = () => async (dispatch) => {
+  dispatch({
+    type: types.FETCH_ALL_ORDERS_REQUEST,
+  });
+
+  try {
+    const { data } = await axios.get("/api/orders");
+    return dispatch({
+      type: types.FETCH_ALL_ORDERS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    return dispatch({
+      type: types.FETCH_ALL_ORDERS_FAILURE,
+      payload: error.response,
+    });
+  }
+};
+
 export const fetchOrder = (id) => async (dispatch) => {
   dispatch({
     type: types.FETCH_ORDER_REQUEST,

@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   return (

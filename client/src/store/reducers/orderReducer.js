@@ -1,6 +1,7 @@
 import * as types from "../constants";
 
 const initialState = {
+  orders: [],
   order: null,
   loading: false,
   error: null,
@@ -48,6 +49,26 @@ const orderReducer = (state = initialState, { type, payload }) => {
         loading: false,
         error: payload,
         order: null,
+      };
+    case types.FETCH_ALL_ORDERS_REQUEST:
+      return {
+        ...state,
+        orders: [],
+        loading: true,
+      };
+    case types.FETCH_ALL_ORDERS_SUCCESS:
+      return {
+        ...state,
+        orders: payload,
+        error: null,
+        loading: false,
+      };
+    case types.FETCH_ALL_ORDERS_FAILURE:
+      return {
+        ...state,
+        orders: [],
+        error: payload,
+        loading: false,
       };
 
     default:

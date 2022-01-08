@@ -45,7 +45,7 @@ const Payment = () => {
               name="method"
               value="Cash On Delivery"
               onChange={(e) => setMethod(e.target.value)}
-              checked={method == "Cash On Delivery" ? true : false}
+              checked={method === "Cash On Delivery" ? true : false}
             />
           </Form.Group>
           <div className="d-grid gap-2 mt-3">

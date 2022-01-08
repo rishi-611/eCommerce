@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Image, Form, Button } from "react-bootstrap";
@@ -28,7 +28,7 @@ const Profile = () => {
     e.preventDefault();
     const { newPass, newPass2 } = passForm;
 
-    if (newPass != newPass2) {
+    if (newPass !== newPass2) {
       return dispatch(
         setAlert("danger", "Passwords do not match. Please try again!")
       );
