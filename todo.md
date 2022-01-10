@@ -1,5 +1,5 @@
 -> add frontend form validation and alerts in register form
 -> create private route wrapper component
--> complete order and payment functionality 
--> add contact details to order model and form
-
+-> complete order and payment functionality (COD done)
+-> Remove items from cart once order is placed
+-> add contact options on place order page

@@ -15,7 +15,7 @@ const Shipping = () => {
 
   const dispatch = useDispatch();
   const [address, setAddress] = useState({
-    phoneNumber: initialAdress.phoneNumer || "",
+    phoneNumber: initialAdress.phoneNumber || "",
     street: initialAdress.street || "",
     city: initialAdress.city || "",
     state: initialAdress.state || "",

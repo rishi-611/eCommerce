@@ -53,6 +53,9 @@ export const placeCODOrder = (navigate, orderForm) => async (dispatch) => {
     //once order is successfully placed, navigate to order page
     navigate("/order/" + data._id);
 
+    //clear cart as order has been placed
+    localStorage.removeItem("cartItems");
+
     return dispatch({
       type: types.PLACE_COD_ORDER_SUCCESS,
       payload: data,

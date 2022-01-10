@@ -71,6 +71,12 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         paymentMethod: payload,
       };
+    case types.PLACE_ORDER_SUCCESS:
+    case types.PLACE_COD_ORDER_SUCCESS:
+      return {
+        ...state,
+        cartItems: [],
+      };
     default:
       return state;
   }
