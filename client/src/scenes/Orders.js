@@ -4,8 +4,8 @@ import { fetchAllOrders } from "../store/actions/orderActions";
 import Spinner from "../components/Spinner";
 import Alert from "../components/Alert";
 import GoBack from "../components/GoBack";
-import { ListGroup, Image, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { ListGroup, Image, Row, Col, Card } from "react-bootstrap";
+// import { Link } from "react-router-dom";
 
 const Orders = () => {
   const { loading, error, orders } = useSelector((state) => state.orders);
@@ -33,13 +33,21 @@ const Orders = () => {
     );
 
   //from each order item will have an array of orderItems in it, we want to aggregate this array
-  let orderItems = [];
-  orders.forEach((order) => orderItems.push(...order.orderItems));
-  console.log(orderItems);
+  let orderItems = [],
+    isPaid = [],
+    isDelivered = [];
+  orders.forEach((order) => {
+    order.orderItems.forEach((item) => {
+      orderItems.push(item);
+      isPaid.push(order.isPaid);
+      isDelivered.push(order.isDelivered);
+    });
+  });
 
   return (
     <React.Fragment>
       <GoBack />
+      <h3 className="order-sub-header text-center">My Orders</h3>
       {loading ? (
         <Spinner></Spinner>
       ) : error ? (
@@ -47,7 +55,54 @@ const Orders = () => {
           Page could not be loaded. Please try again later
         </Alert>
       ) : (
-        "Products"
+        <React.Fragment>
+          <Card>
+            <ListGroup variant="flush">
+              <ListGroup.Item key={0} className="bg-dark text-light py-4">
+                <Row>
+                  <Col className="col-4 d-flex justify-content-center align-items-center  ">
+                    <h5 className="mb-0">Product</h5>
+                  </Col>
+                  <Col className="col-2 d-flex justify-content-center align-items-center">
+                    <h5 className="mb-0">Qty</h5>
+                  </Col>
+                  <Col className="col-2 d-flex justify-content-center align-items-center">
+                    <h5 className="mb-0">Price</h5>
+                  </Col>
+                  <Col className="col-2 d-flex justify-content-center align-items-center">
+                    <h5 className="mb-0">Paid</h5>
+                  </Col>
+                  <Col className="col-2 d-flex justify-content-center align-items-center">
+                    <h5 className="mb-0">Delivered</h5>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+              {orderItems.map((item, i) => (
+                <ListGroup.Item key={item._id} className="py-3">
+                  <Row>
+                    <Col className="col-4">{item.name}</Col>
+                    <Col className="col-2">{item.qty}</Col>
+                    <Col className="col-2 ">{item.price}</Col>
+                    <Col
+                      className={`col-2 font-weight-bold text-${
+                        isPaid[i] ? "success" : "danger"
+                      }`}
+                    >
+                      {isPaid[i] ? "Paid" : "Unpaid"}
+                    </Col>
+                    <Col
+                      className={`col-2 font-weight-bold text-${
+                        isDelivered[i] ? "success" : "danger"
+                      }`}
+                    >
+                      {isDelivered[i] ? "Delivered" : "Not Delivered"}
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          </Card>
+        </React.Fragment>
       )}
     </React.Fragment>
   );
