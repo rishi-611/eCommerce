@@ -52,7 +52,7 @@ const App = () => {
               <Route exact path="/shipping" element={<Shipping />} />
               <Route exact path="/payment" element={<Payment />} />
               <Route exact path="/placeOrder" element={<PlaceOrder />} />
-              <Route exact path="/order/:id" element={<OrderScreen />} />
+              <Route exact path="/orders/:id" element={<OrderScreen />} />
               <Route exact path="/orders" element={<Orders />} />
             </Routes>
           </Container>

@@ -18,7 +18,7 @@ export const placeOrder = (navigate, orderForm) => async (dispatch) => {
     const { data } = await axios.post("/api/orders", body, config);
 
     //once order is successfully placed, navigate to order page
-    navigate("/order/" + data._id);
+    navigate("/orders/" + data._id);
 
     return dispatch({
       type: types.PLACE_ORDER_SUCCESS,
@@ -51,7 +51,7 @@ export const placeCODOrder = (navigate, orderForm) => async (dispatch) => {
     const { data } = await axios.post("/api/orders/COD", body, config);
 
     //once order is successfully placed, navigate to order page
-    navigate("/order/" + data._id);
+    navigate("/orders/" + data._id);
 
     //clear cart as order has been placed
     localStorage.removeItem("cartItems");

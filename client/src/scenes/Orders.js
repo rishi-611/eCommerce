@@ -5,13 +5,14 @@ import Spinner from "../components/Spinner";
 import Alert from "../components/Alert";
 import GoBack from "../components/GoBack";
 import { ListGroup, Image, Row, Col, Card } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import OrderListItem from "../components/OrderListItem";
 
 const Orders = () => {
   const { loading, error, orders } = useSelector((state) => state.orders);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (orders?.length > 0) return;
     dispatch(fetchAllOrders());
   }, []);
   if (loading)
@@ -32,63 +33,9 @@ const Orders = () => {
       </React.Fragment>
     );
 
-  //from each order item will have an array of orderItems in it, we want to aggregate this array
-  // let orderItems = [],
-  //   isPaid = [],
-  //   isDelivered = [];
-  // orders.forEach((order) => {
-  //   order.orderItems.forEach((item) => {
-  //     orderItems.push(item);
-  //     isPaid.push(order.isPaid);
-  //     isDelivered.push(order.isDelivered);
-  //   });
-  // });
-  // console.log(orderItems);
+  // const renderListGroup = (order) => (
 
-  const renderListGroup = (order) => (
-    <ListGroup.Item style={{ borderBottom: "1px solid #888" }}>
-      {order.orderItems.map((item, i) => (
-        <Row className="mb-2" key={i}>
-          <Col className="col-1">
-            <LinkContainer to={`/products/${item.productId._id}`}>
-              <Image
-                fluid
-                src={item.productId.image}
-                alt="product image"
-              ></Image>
-            </LinkContainer>
-          </Col>
-          <Col className="col-3 text-start">{item.name}</Col>
-          <Col className="col-2">{item.qty}</Col>
-          <Col className="col-2 ">${(item.price * item.qty).toFixed(2)}</Col>
-          <Col
-            className={`col-2 font-weight-bold text-${
-              order.isPaid ? "success" : "danger"
-            } ${i !== 0 ? "d-none" : ""}`}
-          >
-            {order.isPaid ? (
-              <i className="fas fa-check text-success"></i>
-            ) : (
-              <i className="fas fa-times text-danger"></i>
-            )}
-          </Col>
-          <Col
-            className={`col-2 font-weight-bold text-${
-              order.isDelivered ? "success" : "danger"
-            }
-              ${i !== 0 ? "d-none" : ""}
-              `}
-          >
-            {order.isDelivered ? (
-              <i className="fas fa-check text-success"></i>
-            ) : (
-              <i className="fas fa-times text-danger"></i>
-            )}
-          </Col>
-        </Row>
-      ))}
-    </ListGroup.Item>
-  );
+  // );
 
   return (
     <React.Fragment>
@@ -109,11 +56,16 @@ const Orders = () => {
                   <Col className="col-4 d-flex justify-content-center align-items-center  ">
                     <h5 className="mb-0">Product</h5>
                   </Col>
-                  <Col className="col-2 d-flex justify-content-center align-items-center">
+                  {/*
+                    <Col className="col-2 d-flex justify-content-center align-items-center">
                     <h5 className="mb-0">Qty</h5>
                   </Col>
                   <Col className="col-2 d-flex justify-content-center align-items-center">
                     <h5 className="mb-0">Total Price</h5>
+                  </Col>
+                    */}
+                  <Col className="col-2 d-flex  justify-content-center align-items-center">
+                    <h5 className="mb-0">Placed On</h5>
                   </Col>
                   <Col className="col-2 d-flex justify-content-center align-items-center">
                     <h5 className="mb-0">Paid</h5>
@@ -121,6 +73,7 @@ const Orders = () => {
                   <Col className="col-2 d-flex justify-content-center align-items-center">
                     <h5 className="mb-0">Delivered</h5>
                   </Col>
+                  <Col className="col-2 d-flex justify-content-center align-items-center"></Col>
                 </Row>
               </ListGroup.Item>
               {/*
@@ -132,7 +85,9 @@ const Orders = () => {
                 </ListGroup.Item>
               ))}
                 */}
-              {orders.map((order) => renderListGroup(order))}
+              {orders.map((order) => (
+                <OrderListItem order={order} key={order._id} />
+              ))}
             </ListGroup>
           </Card>
         </React.Fragment>

@@ -3,3 +3,4 @@
 -> complete order and payment functionality (COD done)
 -> Remove items from cart once order is placed
 -> add contact options on place order page
+-> split orders table in two vertical halves
