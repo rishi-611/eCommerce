@@ -39,7 +39,17 @@ export const getAllOrders = async (req, res) => {
   const userId = req.user._id;
   try {
     //find all orders, whose user is the current user
-    const orders = await Order.find({ user: userId });
+
+    //populate the nested product field
+    const orders = await Order.find({ user: userId })
+      .populate({
+        path: "orderItems",
+        populate: {
+          path: "productId",
+          model: "Product",
+        },
+      })
+      .exec();
     if (!orders || !orders.length) {
       return res.status(404).json({
         message: "You don't have any orders yet!",

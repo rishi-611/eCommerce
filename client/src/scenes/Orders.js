@@ -67,7 +67,7 @@ const Orders = () => {
                     <h5 className="mb-0">Qty</h5>
                   </Col>
                   <Col className="col-2 d-flex justify-content-center align-items-center">
-                    <h5 className="mb-0">Price</h5>
+                    <h5 className="mb-0">Total Price</h5>
                   </Col>
                   <Col className="col-2 d-flex justify-content-center align-items-center">
                     <h5 className="mb-0">Paid</h5>
@@ -79,10 +79,19 @@ const Orders = () => {
               </ListGroup.Item>
               {orderItems.map((item, i) => (
                 <ListGroup.Item key={item._id} className="py-3">
-                  <Row>
-                    <Col className="col-4">{item.name}</Col>
+                  <Row className="text-center">
+                    <Col className="col-1">
+                      <Image
+                        fluid
+                        src={item.productId.image}
+                        alt="product image"
+                      ></Image>
+                    </Col>
+                    <Col className="col-3 text-start">{item.name}</Col>
                     <Col className="col-2">{item.qty}</Col>
-                    <Col className="col-2 ">{item.price}</Col>
+                    <Col className="col-2 ">
+                      ${(item.price * item.qty).toFixed(2)}
+                    </Col>
                     <Col
                       className={`col-2 font-weight-bold text-${
                         isPaid[i] ? "success" : "danger"
